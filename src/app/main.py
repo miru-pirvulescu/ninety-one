@@ -42,14 +42,21 @@ def getTopScorers(scoreData: csv):
 
 
 def __main__():
-    path =_getPathToTestData()
-    
-    with open(path) as testData:
-        participants, topScore = getTopScorers(testData)
-        for p in participants:
-            sys.stdout.write(p)
-            sys.stdout.write('\n')
-        sys.stdout.write("Score: %s" % str(topScore))
+    path = input("Please send a file path: ")
+
+    if path[-4:] != ".csv": # Check that the extension of the file is supported
+        sys.stdout.write("A file with a .csv extension is required!")
+        return
+        
+    try:
+        with open(path) as testData:
+            participants, topScore = getTopScorers(testData)
+            for p in participants:
+                sys.stdout.write(p)
+                sys.stdout.write('\n')
+            sys.stdout.write("Score: %s" % str(topScore))
+    except:
+        sys.stdout.write("Provided path does not exist!")
 
 
 if __name__ == "__main__":
