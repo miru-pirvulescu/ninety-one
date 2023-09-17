@@ -1,6 +1,6 @@
 import sys
 from input_parser import InputParser
-from utils import isValidFileType
+from utils import isValidFileType, getHelpText, getPathToTestCSV
 
 class App:
     def getTopScorers(self, path):
@@ -24,26 +24,58 @@ class App:
 
         return sorted(topScorers), currentTopScore
 
+    def processCommand(self, command):
+        """
+        Based on the available commands, provide the appropriate answer.
+        Params:
+            - command: str - a command coming from the user
+        """
+        if command.lower() == "help":
+            getHelpText()
+
+        elif command.lower() == "example":
+            sys.stdout.write("Procesing results from %s \n" % getPathToTestCSV())
+            participants, score = self.getTopScorers(getPathToTestCSV())
+            self.sendResults(participants, score)
+
+        elif command.lower() == "run":
+            self.run()
+
+        elif command.lower() == "quit":
+            sys.stdout.write("Goodbye!")
+            return
+        else:
+            sys.stdout.write("I'm afraid I don't understand that command. Please type 'help' to see what I understand")
+
+        newCommand = input("\nWhat else can I help with? ")
+        self.processCommand(newCommand)
+
 
     def run(self):
+        """Run the code to calculate top scorers"""
         path = input("Please send a file path: ")
 
         if not isValidFileType(path):
             sys.stdout.write("A file with a .csv or .txt extension is required!")
             return
-            
         try:
-            participants, topScore = self.getTopScorers(path)
-            for p in participants:
-                sys.stdout.write(p)
-                sys.stdout.write('\n')
-            sys.stdout.write("Score: %s" % str(topScore))
+            participants, score = self.getTopScorers(path)
+            self.sendResults(participants, score)
         except:
             sys.stdout.write("Provided path does not exist!")
+    
 
+    def sendResults(self, participants, topScore):
+        """Display the results to the users"""
+        for p in participants:
+            sys.stdout.write(p)
+            sys.stdout.write('\n')
+        sys.stdout.write("Score: %s" % str(topScore))
 
 def __main__():
-    App().run()
+    firstCommand = input("Welcome! What would you like to begin with? (type help if you are unsure): ")
+
+    App().processCommand(firstCommand)
 
 
 if __name__ == "__main__":

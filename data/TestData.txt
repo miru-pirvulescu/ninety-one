@@ -1,5 +1,6 @@
 First Name,Second Name,Score
-Dee,Moore,56
-Sipho,Lolo,78
-Noosrat,Hoosain,64
-George,Of The Jungle,78
+Bruce,Wayne,97
+Clark,Kent,60
+Barry,Allen,84
+Diana,Prince,78
+Jack,White,97
