@@ -7,15 +7,15 @@ class App:
         """
         Get the top scorers in a CSV file
         Params: 
-            scoreData: csv - file containing the name and score of the given participants
+            path: str - path to file containing data to process
         Return:
             topScorers: List[str] - list of all the participants who have the highest score
         """
         topScorers = []
         currentTopScore = -1 # Will assume a constraint that the scores cannot be below 0
-        csvParser = InputParser(path, delimiter=",")
-        dataEntries = csvParser.parseFile()
-        for entry in dataEntries:
+        inputParser = InputParser(path, delimiter=",")
+
+        for entry in inputParser.parseFile():
             if entry[1] > currentTopScore:
                 currentTopScore = entry[1]
                 topScorers = [entry[0]]
@@ -29,7 +29,7 @@ class App:
         path = input("Please send a file path: ")
 
         if not isValidFileType(path):
-            sys.stdout.write("A file with a .csv extension is required!")
+            sys.stdout.write("A file with a .csv or .txt extension is required!")
             return
             
         try:
@@ -44,6 +44,7 @@ class App:
 
 def __main__():
     App().run()
+
 
 if __name__ == "__main__":
     __main__()
