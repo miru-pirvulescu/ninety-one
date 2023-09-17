@@ -11,10 +11,9 @@ class AppTests(TestCase):
         self.app = App()
 
     def test_getTopScorers(self):
-        with open(getPathToTestData()) as tesFile:
-            names, score = self.app.getTopScorers(tesFile)
-            self.assertListEqual(names, ["George Of The Jungle", "Sipho Lolo"])
-            self.assertEqual(score, 78)
+        names, score = self.app.getTopScorers(getPathToTestData())
+        self.assertListEqual(names, ["George Of The Jungle", "Sipho Lolo"])
+        self.assertEqual(score, 78)
 
     @patch('builtins.input', return_value=getPathToTestData())
     def test_run(self, mockInput):
