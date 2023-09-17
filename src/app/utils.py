@@ -2,11 +2,16 @@ import os.path
 
 def isValidFileType(path):
     """Ensure the file type is supported by the app."""
-    return path[-4:] == ".csv"
+    extension = path[-4:]
+    return extension in [".csv", ".txt"]
 
-def getPathToTestData():
+def getPathToTestCSV():
     my_path = os.path.abspath(os.path.dirname(__file__))
     return os.path.join(my_path, "..\\..\\data\\TestData.csv")
+
+def getPathToTestTXT():
+    my_path = os.path.abspath(os.path.dirname(__file__))
+    return os.path.join(my_path, "..\\..\\data\\TestData.txt")
 
 def makeNameString(firstName, lastName):
     """
