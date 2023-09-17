@@ -23,4 +23,5 @@ Running main.py will open a command prompt that takes the user into the applicat
   - help: see command list
   - run: process results for participants from .csv or .txt file
   - quit: leave app
+    
 The run command will prompt the user to send a file path to the script. This file path must be an absolute path in the system.
